@@ -1,13 +1,15 @@
 import customtkinter as ctk
 import pandas as pd
 from pandas.errors import EmptyDataError
+import os 
 from selenium.webdriver import Chrome
 
+caminho_html = os.path.abspath("site.html")
+linkk = "file:///" + caminho_html
 
-linkk = "https://64.media.tumblr.com/3b9829cbb2d39d186cd38034fd92a904/tumblr_orj1utQBQp1vt7aw9o1_400.gif"
 ctk.set_appearance_mode('dark')
 
-ARQUIVO = "usuarios.csv"
+ARQUIVO = "./outros/usuarios.csv"
 
 def validar_login():
     usuario = campo_usuario.get().strip()

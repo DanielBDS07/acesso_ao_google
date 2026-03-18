@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>bem la ele</title>
+</head>
+<body>
+    <header>
+        <h1><abbr title="01001100 01110101 01100011 01101001 01101111">CICADA 3301</abbr></h1>
+        <p>sempre quando vc estiver dormindo, eu estarei la</p>
+    </header>
+
+    <main>
+        <!-- Introdução -->
+        <section>
+            <h2>Se vc chegou ate aqui, temos muito oq conversar</h2>
+            <p>Quanto tempo amigos, infelizmente a maioria de vocês ja não estão mais entre nois, então serei breve</p>
+            <p>Tente responder corretamente para passar</p>
+        </section>
+
+        <!-- Pergunta 1 -->
+        <section>
+            <h2>Pergunta 1: Quem fez o ultimo pedido?</h2>
+            <form>
+                <input type="radio" value="Jojo" name="Pergunta1"> Jojo
+                <input type="radio" value="Dante" name="Pergunta1"> Dante
+                <input type="radio" value="Ezra" name="Pergunta1"> Ezra
+                <input type="radio" value="Ramon" name="Pergunta1"> Ramon
+            </form>
+        </section>
+
+        <!-- Pergunta 2 -->
+        <section>
+            <h2>Pergunta 2: Qual o nome do personagem que deu mais dano?</h2>
+            <form>
+                <input type="text" id="p2" placeholder="Digite sua resposta...">
+            </form>
+        </section>
+
+        <!-- Pergunta 3 -->
+        <section>
+            <h2>Pergunta 3: Em que dia tudo começou?</h2>
+            <form>
+                <input type="date" id="p3">
+            </form>
+        </section>
+
+        <!-- Pergunta 4 -->
+        <section>
+            <h2>Pergunta 4: Quem ainda está vivo?</h2>
+            <form>
+                <input type="checkbox" value="Jojo" name="Pergunta4"> Jojo<br>
+                <input type="checkbox" value="Ramon" name="Pergunta4"> Ramon<br>
+                <input type="checkbox" value="Ezra" name="Pergunta4"> Ezra<br>
+                <input type="checkbox" value="Dante" name="Pergunta4"> Dante<br>
+                <input type="checkbox" value="Kobayashi" name="Pergunta4"> Kobayashi<br>
+            </form>
+        </section>
+
+        <!-- Pergunta 5 -->
+        <section>
+            <h2>Pergunta 5: Faça upload de uma foto</h2>
+            <form>
+                <input type="file" id="p5">
+            </form>
+        </section>
+
+        <!-- Pergunta 6 -->
+        <section>
+            <h2>Pergunta 6: Quem ainda deve sofrer mais?</h2>
+            <form>
+                <select id="p6">
+                    <option value="">Selecione...</option>
+                    <option value="Jojo">Jojo</option>
+                    <option value="Ezra">Ezra</option>
+                    <option value="Dante">Dante</option>
+                    <option value="Rebeca">Rebeca</option>
+                </select>
+            </form>
+        </section>
+
+        <br>
+
+        <!-- Botão -->
+        <button onclick="corrigir()">Finalizar</button>
+        <p id="resultado"></p>
+    </main>
+
+    <script>
+        function corrigir() {
+            let pontos = 0;
+
+            // Pergunta 1
+            let p1 = document.querySelector('input[name="Pergunta1"]:checked');
+            if (p1 && p1.value === "Ezra") {
+                pontos++;
+            }
+
+            // Pergunta 2
+            let p2 = document.getElementById("p2").value
+                .toLowerCase()
+                .trim();
+
+            if (p2 === "rebeca") {
+                pontos++;
+            }
+
+            // Pergunta 3
+            let p3 = document.getElementById("p3").value;
+            if (p3 === "2025-05-15") {
+                pontos++;
+            }
+
+            // Pergunta 4
+            let corretos = ["Jojo", "Ezra"];
+            let marcados = document.querySelectorAll('input[name="Pergunta4"]:checked');
+            let valores = Array.from(marcados).map(el => el.value);
+
+            if (JSON.stringify(valores.sort()) === JSON.stringify(corretos.sort())) {
+                pontos++;
+            }
+
+            // Pergunta 6 (qualquer resposta válida conta)
+            let p6 = document.getElementById("p6").value;
+            if (p6 !== "") {
+                pontos++;
+            }
+
+            // Resultado final
+            if (pontos === 5) {
+                document.getElementById("resultado").innerText = "ACESSO CONCEDIDO...";
+                setTimeout(() => {
+                    window.location.href = "secreto.html";
+                }, 2000);
+            } else {
+                document.getElementById("resultado").innerText =
+                    "Acesso negado. Você acertou " + pontos + " de 5.";
+            }
+        }
+    </script>
+</body>
+</html>
